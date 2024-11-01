@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Студенты</title>
+    <link rel="stylesheet" href="./style/jquery-ui.css">
+    <script src="./script/jquery-3.6.0.min.js"></script>
+    <script src="./script/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+    <h1 class="title">Система учета студентов</h1>
+    <div class="container">
+        <form id="addStudentForm">
+            <input type="text" id="surname" placeholder="Фамилия" required>
+            <input type="text" id="name" placeholder="Имя" required>
+            <input type="text" id="patronymic" placeholder="Отчество" required>
+            <input type="date" id="birthday" placeholder="Дата рождения" required>
+            <input type="text" id="groupName" placeholder="Название группы" required>
+            <button type="submit">Добавить студента</button>
+        </form>
+    
+        <button id="loadStudents" class="load-students">Загрузить студентов</button>
+        <ul id="studentList" class="student-list"></ul>
+    </div>
+
+    <script src="./script/index.js"></script>
+</body>
+</html>
