@@ -2,7 +2,8 @@ import { Student } from "../model/Student.js";
 
 class StudentService {
     constructor() {
-        this._apiUrl = 'http://localhost:8080/api';
+        const apiUrlMeta = document.querySelector('meta[name="api-url"]');
+        this._apiUrl = apiUrlMeta.content === '__API_URL__' ? 'http://localhost:8080/api' : apiUrlMeta.content;
     }
 
     async postStudent(student) {

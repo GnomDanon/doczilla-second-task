@@ -27,6 +27,8 @@ services:
   frontend:
     build:
       context: ./front
+      args:
+        BACKEND_API_URL: http://localhost:8082/api
     ports:
       - "82:80"
     depends_on:
