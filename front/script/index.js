@@ -1,52 +1,16 @@
-const baseUrl = "http://localhost:8082/api/student"
+import { StudentForm } from "./component/StudentForm.js";
+import { StudentList } from "./component/StudentList.js";
 
-$('#addStudentForm').submit(function(event) {
-    event.preventDefault()
-    const student = {
-        name: $('#name').val(),
-        surname: $('#surname').val(),
-        patronymic: $('#patronymic').val(),
-        birthday: $('#birthday').val(),
-        groupName: $('#groupName').val()
-    };
+$(function() {
+    const studentForm = new StudentForm($('#name'), $('#surname'), $('#patronymic'), $('#birthday'), $('#groupName'));
+    const studentList = new StudentList($('#studentList'));
 
-    $.ajax({
-        url: baseUrl,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(student),
-        success: function() {
-            alert('Студент успешно добавлен')
-        }
+    $('#addStudentForm').submit(function(event) {
+        event.preventDefault();
+        studentForm.addStudent();
+    });
+
+    $('#loadStudents').click(function() {
+        studentList.renderAllStudents();
     })
-})
-
-function loadStudents() {
-    $.getJSON(baseUrl, function(data) {
-        $('#studentList').empty()
-        data.forEach(student => {
-            birthdayArray = student.birthday.split('-')
-            $('#studentList').append(`
-                <li>
-                    <p>${student.surname} ${student.name} ${student.patronymic} ${birthdayArray[2]}-${birthdayArray[1]}-${birthdayArray[0]} ${student.groupName}</p>
-                    <button onclick="deleteStudent(${student.id})">Удалить студента</button>
-                </li>
-                `)
-        });
-    })
-}
-
-function deleteStudent(id) {
-    $.ajax({
-        url: baseUrl + `/${id}`,
-        type: 'DELETE',
-        success: function(result) {
-            alert(`Студентов удалено: ${result}`)
-            loadStudents()
-        }
-    })
-}
-
-$('#loadStudents').click(function() {
-    loadStudents()
 })
